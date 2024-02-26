@@ -1,6 +1,6 @@
 // Save third-page and fourth-page buttons as variables
-let thirdButton = document.getElementById('third-page');
-let fourthButton = document.getElementById('fourth-page');
+let thirdButton = document.getElementById('fifth-page');
+let fourthButton = document.getElementById('sixth-page');
 
 // Add click event to both elements and set scrollPage function as callback function
 thirdButton.addEventListener('click', scrollPage);
@@ -10,7 +10,7 @@ function scrollPage(){
 	// this keyword returns the HTML element that triggered the event (in this case, click event)
 	// Check id of this HTML element
 	// If id name is 'third-page'
-	if(this.id === 'third-page'){
+	if(this.id === 'fifth-page'){
 		window.scrollTo({
 			// Scroll twice the height of window height
   			top: window.innerHeight * 2,
@@ -21,7 +21,7 @@ function scrollPage(){
 	}
 
 	// If id name is 'fourth-page'
-	if(this.id === 'fourth-page'){
+	if(this.id === 'sixth-page'){
 		window.scrollTo({
 			// Scroll three times the height of window height
   			top: window.innerHeight * 3,

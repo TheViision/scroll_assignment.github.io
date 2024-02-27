@@ -1,79 +1,23 @@
-// Save third-page and fourth-page buttons as variables
-let thirdButton = document.getElementById('fifth-page');
-let fourthButton = document.getElementById('sixth-page');
+document.addEventListener('DOMContentLoaded', () => {
+    const clockDiv = document.getElementById('clock-div'); // The clock or element to move
+    const clockText = document.getElementById('clock-text'); // Text element to update
+    const stories = [
+ 
+    ];
 
-// Add click event to both elements and set scrollPage function as callback function
-thirdButton.addEventListener('click', scrollPage);
-fourthButton.addEventListener('click', scrollPage);
+    document.addEventListener('scroll', function() {
+        let pos = window.scrollY;
+        let height = window.innerHeight;
+        let width = window.innerWidth;
+        let sectionNum = Math.floor(pos / height); // Determine the current section based on scroll position
 
-function scrollPage(){
-	// this keyword returns the HTML element that triggered the event (in this case, click event)
-	// Check id of this HTML element
-	// If id name is 'third-page'
-	if(this.id === 'fifth-page'){
-		window.scrollTo({
-			// Scroll twice the height of window height
-  			top: window.innerHeight * 2,
-  			left: 0,
-  			// Setting behavior to 'smooth' will animate the scroll
-  			behavior: 'smooth'
-		});
-	}
+        // Update the text for the current section
+        if (sectionNum < stories.length) {
+            clockText.innerHTML = stories[sectionNum];
+        }
 
-	// If id name is 'fourth-page'
-	if(this.id === 'sixth-page'){
-		window.scrollTo({
-			// Scroll three times the height of window height
-  			top: window.innerHeight * 3,
-  			left: 0,
-  			behaviore: 'smooth'
-		});
-	}
-}
-
-// An array of stories as strings
-let stories = [
-	'Welcome',
-	'We start with 8000-2000 B.C.',
-	'We move to 480-404 BCE',
-	'Then we start with 1490 AD',
-    "1760-1840",
-    "Lastly the current age which started 1980"
-];
-
-let clockDiv = document.getElementById('clock-div');
-let clockText = document.getElementById('clock-text');
-let navButtons = document.getElementsByClassName('nav-btn');
-
-// Add scroll event for the whole HTLM document and set changeText function as callback
-document.addEventListener('scroll', changeText);
-
-// changeText function runs whenever scroll happens on the web page
-function changeText(){
-	// Uncomment line below to see scrollY position change
-	// console.log(window.scrollY);
-
-	// pos saves current scrollY position
-	let pos = window.scrollY;
-	// width saves current web page width
-	let width = window.innerWidth;
-	// height saves current web page height
-	let height = window.innerHeight;
-	// Calculate which section the user has scrolled to
-	// parseInt() function used to ignore decimals
-	let sectionNum = parseInt(pos / height);
-
-	// Set the text of cat-text element depending on which section the user has currently scrolled to
-	catText.innerHTML = stories[sectionNum];
-	// Map vertical scroll position to the horizontal position of the cat
-	catDiv.style.left = pos / (height * 4) * width + 'px';
-
-	// Fix color of navigation button
-	// Set all button color to white
-	for(let i = 0; i < navButtons.length; i++){
-		navButtons[i].style.backgroundColor = 'white';
-	}
-
-	// Set color of current section button to black
-	navButtons[sectionNum].style.backgroundColor = 'black';
-}
+        // Move the clock element horizontally based on the scroll position
+        // The formula: pos / (height * 12) * width + 'px';
+        clockDiv.style.left = (pos / (height * 12) * width) + 'px';
+    });
+});
